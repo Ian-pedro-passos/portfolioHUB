@@ -1,48 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-    <title>Calculadora</title>
+<meta charset="UTF-8">
+<title>Calculadora</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #1e1e2f, #3a3a5f);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    .calculadora {
+        background: #222;
+        padding: 20px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        width: 260px;
+    }
+
+    #display {
+        width: 100%;
+        height: 50px;
+        font-size: 24px;
+        margin-bottom: 10px;
+        text-align: right;
+        padding: 5px;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .botoes {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    button {
+        height: 50px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+    button:hover {
+        transform: scale(1.05);
+    }
+
+    .operador {
+        background: #ff9500;
+        color: white;
+    }
+
+    .igual {
+        background: #28a745;
+        color: white;
+        grid-column: span 2;
+    }
+
+    .limpar {
+        background: #dc3545;
+        color: white;
+        grid-column: span 2;
+    }
+</style>
 </head>
-<body style="text-align:center; font-family: Arial;">
 
-<h2>Calculadora</h2>
+<body>
 
-<input id="n1" type="number">
-<input id="n2" type="number">
+<div class="calculadora">
+    <input type="text" id="display" disabled>
 
-<br><br>
+    <div class="botoes">
+        <button onclick="add('7')">7</button>
+        <button onclick="add('8')">8</button>
+        <button onclick="add('9')">9</button>
+        <button class="operador" onclick="add('/')">/</button>
 
-<button onclick="somar()">+</button>
-<button onclick="subtrair()">-</button>
-<button onclick="multiplicar()">*</button>
-<button onclick="dividir()">/</button>
+        <button onclick="add('4')">4</button>
+        <button onclick="add('5')">5</button>
+        <button onclick="add('6')">6</button>
+        <button class="operador" onclick="add('*')">*</button>
 
-<h3 id="resultado"></h3>
+        <button onclick="add('1')">1</button>
+        <button onclick="add('2')">2</button>
+        <button onclick="add('3')">3</button>
+        <button class="operador" onclick="add('-')">-</button>
+
+        <button onclick="add('0')">0</button>
+        <button onclick="add('.')">.</button>
+        <button class="operador" onclick="add('+')">+</button>
+
+        <button class="limpar" onclick="limpar()">C</button>
+        <button class="igual" onclick="calcular()">=</button>
+    </div>
+</div>
 
 <script>
-function somar() {
-    let n1 = Number(document.getElementById("n1").value);
-    let n2 = Number(document.getElementById("n2").value);
-    document.getElementById("resultado").innerText = n1 + n2;
-}
+    function add(valor) {
+        document.getElementById("display").value += valor;
+    }
 
-function subtrair() {
-    let n1 = Number(document.getElementById("n1").value);
-    let n2 = Number(document.getElementById("n2").value);
-    document.getElementById("resultado").innerText = n1 - n2;
-}
+    function limpar() {
+        document.getElementById("display").value = "";
+    }
 
-function multiplicar() {
-    let n1 = Number(document.getElementById("n1").value);
-    let n2 = Number(document.getElementById("n2").value);
-    document.getElementById("resultado").innerText = n1 * n2;
-}
+    function calcular() {
+        try {
+            let resultado = eval(document.getElementById("display").value);
+            document.getElementById("display").value = resultado;
+        } catch {
+            document.getElementById("display").value = "Erro";
+        }
+    }
+</script>
 
-function dividir() {
-    let n1 = Number(document.getElementById("n1").value);
-    let n2 = Number(document.getElementById("n2").value);
-    document.getElementById("resultado").innerText = n1 / n2;
-}
+</body>
+</html>
 </script>
 
 </body>
